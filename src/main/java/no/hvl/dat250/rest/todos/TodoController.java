@@ -61,23 +61,6 @@ public class TodoController {
       }
     }
     throw new NoSuchElementException(String.format(TODO_WITH_THE_ID_X_NOT_FOUND, todoId));
-
-    /* Optional<Todo> existingTodo = todoList.stream().filter(todo -> todo.getId().equals(todoId)).findFirst();
-
-    if (existingTodo.isPresent()) {
-      Todo todoToUpdate = existingTodo.get();
-      todoToUpdate.setSummary(updatedTodo.getSummary());
-      todoToUpdate.setDescription(updatedTodo.getDescription());
-
-      int index = todoList.indexOf(todoToUpdate);
-      if (index != -1) {
-        todoList.set(index, todoToUpdate);
-      }
-
-      return ResponseEntity.ok(todoToUpdate);
-    } else {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format(TODO_WITH_THE_ID_X_NOT_FOUND, todoId));
-    }*/
   }
 
   // Delete (DELETE)
