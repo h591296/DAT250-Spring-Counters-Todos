@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Rest-Endpoint for todos.
  */
 @RestController
+@RequestMapping("/todos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TodoController {
 
   public static final String TODO_WITH_THE_ID_X_NOT_FOUND = "Todo with the id %s not found!";
@@ -24,7 +28,7 @@ public class TodoController {
   private Long nextId = 1L;
 
   // Create (POST)
-  @PostMapping("/todos")
+  @PostMapping("/add")
   public Todo createTodo(@RequestBody Todo todo) {
     todo.setId(nextId);
     todoList.add(todo);
@@ -33,7 +37,7 @@ public class TodoController {
   }
 
   // Read (GET)
-  @GetMapping("/todos/{todoId}")
+  @GetMapping("/{todoId}")
   public Todo getTodoById(@PathVariable Long todoId) {
     for (Todo todo : todoList){
       if (todo.getId().equals(todoId)) {
@@ -44,13 +48,13 @@ public class TodoController {
   }
 
   // Read (GET)
-  @GetMapping("/todos")
-  public List<Todo> getAllTodos() {
+  @GetMapping
+  public List<Todo> getTodos() {
     return todoList;
   }
 
   // Update (PUT)
-  @PutMapping("/todos/{todoId}")
+  @PutMapping("/{todoId}")
   public Todo updateTodo(@PathVariable Long todoId, @RequestBody Todo updatedTodo) {
     
     for (Todo todo : todoList) {
@@ -64,7 +68,7 @@ public class TodoController {
   }
 
   // Delete (DELETE)
-  @DeleteMapping("/todos/{todoId}")
+  @DeleteMapping("/{todoId}")
   public Todo deleteTodo(@PathVariable Long todoId) {
 
     for (Todo todo : todoList) {

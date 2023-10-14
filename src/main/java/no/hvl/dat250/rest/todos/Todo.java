@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Todo {
     private Long id;
-    private String summary;
     private String description;
-
+    private String summary;
+    
     public Todo() {
     }
 
-    public Todo(Long id, String summary, String description) {
+    public Todo(Long id, String description, String summary) {
         this.id = id;
-        this.summary = summary;
         this.description = description;
+        this.summary = summary;
     }
 
-    public Todo(String summary, String description) {
-        this(null, summary, description);
+    public Todo(String description, String summary) {
+        this(null, description, summary);
     }
     public Long getId() {
         return id;
